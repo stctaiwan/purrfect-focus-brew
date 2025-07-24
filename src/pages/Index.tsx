@@ -66,7 +66,13 @@ const Index = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Timer Section */}
           <div className="lg:col-span-2 space-y-6">
-            <PomodoroTimer onSessionComplete={handleSessionComplete} />
+            <PomodoroTimer 
+              onSessionComplete={handleSessionComplete}
+              treats={treats}
+              toys={toys}
+              onSpendTreats={handleSpendTreats}
+              onSpendToys={handleSpendToys}
+            />
           </div>
 
           {/* Cat and Stats Sidebar */}
