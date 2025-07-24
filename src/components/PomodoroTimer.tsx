@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Play, Pause, RotateCcw, Coffee } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -18,6 +19,7 @@ export const PomodoroTimer = ({ onSessionComplete, treats, toys, onSpendTreats, 
   const [isRunning, setIsRunning] = useState(false);
   const [sessionType, setSessionType] = useState<'focus' | 'break'>('focus');
   const [totalTime, setTotalTime] = useState(25 * 60);
+  const [taskName, setTaskName] = useState('');
   const [catState, setCatState] = useState({
     happiness: 50,
     energy: 50,
@@ -156,10 +158,16 @@ export const PomodoroTimer = ({ onSessionComplete, treats, toys, onSpendTreats, 
 
   return (
     <Card className="bg-gradient-cozy border-cat-orange/20 shadow-soft">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold text-cat-brown flex items-center justify-center gap-2">
-          {sessionType === 'focus' ? '🐱 Focus Time' : '☕ Break Time'}
-        </CardTitle>
+      <CardHeader className="text-center space-y-3">
+        <div className="flex items-center justify-center gap-2 text-xl font-bold text-cat-brown">
+          🐱 {sessionType === 'focus' ? 'Focus Time' : 'Break Time'}
+        </div>
+        <Input
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+          placeholder={sessionType === 'focus' ? "What are you working on?" : "What's your break activity?"}
+          className="text-center text-lg font-medium bg-cat-cream border-cat-orange/30 focus:border-cat-orange placeholder:text-muted-foreground/60"
+        />
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Circular Timer with Cat in Center */}
@@ -265,9 +273,13 @@ export const PomodoroTimer = ({ onSessionComplete, treats, toys, onSpendTreats, 
         </div>
 
         <div className="text-center text-sm text-muted-foreground">
-          {sessionType === 'focus' 
-            ? 'Stay focused to earn treats for your cat!' 
-            : 'Take a break and let your cat play!'}
+          {taskName ? (
+            <span className="font-medium">Working on: "{taskName}"</span>
+          ) : (
+            sessionType === 'focus' 
+              ? 'Stay focused to earn treats for your cat!' 
+              : 'Take a break and let your cat play!'
+          )}
         </div>
       </CardContent>
     </Card>
