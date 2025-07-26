@@ -7,7 +7,7 @@ import { Play, Pause, RotateCcw, Coffee } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface PomodoroTimerProps {
-  onSessionComplete: (type: 'focus' | 'break') => void;
+  onSessionComplete: (type: 'focus' | 'break', taskName?: string) => void;
   treats: number;
   toys: number;
   onSpendTreats: (amount: number) => void;
@@ -64,7 +64,7 @@ export const PomodoroTimer = ({ onSessionComplete, treats, toys, onSpendTreats, 
       }, 1000);
     } else if (timeLeft === 0) {
       setIsRunning(false);
-      onSessionComplete(sessionType);
+      onSessionComplete(sessionType, taskName);
       
       toast({
         title: sessionType === 'focus' ? '🎉 Focus session complete!' : '☕ Break time over!',
