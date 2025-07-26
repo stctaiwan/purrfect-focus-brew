@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -80,25 +81,33 @@ export const StatsPanel = ({ stats }: StatsPanelProps) => {
 
         {/* Statistics Grid */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="text-center p-3 bg-muted rounded-lg">
-            <div className="text-2xl font-bold text-primary">{stats.totalSessions}</div>
-            <div className="text-xs text-muted-foreground">Total Sessions</div>
-          </div>
+          <Link to="/dashboard" className="block group">
+            <div className="text-center p-3 bg-muted rounded-lg hover:bg-cat-orange/20 transition-colors cursor-pointer group-hover:scale-105 transform duration-200">
+              <div className="text-2xl font-bold text-primary">{stats.totalSessions}</div>
+              <div className="text-xs text-muted-foreground">Total Sessions</div>
+            </div>
+          </Link>
 
-          <div className="text-center p-3 bg-muted rounded-lg">
-            <div className="text-2xl font-bold text-primary">{formatTime(stats.totalFocusTime)}</div>
-            <div className="text-xs text-muted-foreground">Focus Time</div>
-          </div>
+          <Link to="/dashboard" className="block group">
+            <div className="text-center p-3 bg-muted rounded-lg hover:bg-cat-orange/20 transition-colors cursor-pointer group-hover:scale-105 transform duration-200">
+              <div className="text-2xl font-bold text-primary">{formatTime(stats.totalFocusTime)}</div>
+              <div className="text-xs text-muted-foreground">Focus Time</div>
+            </div>
+          </Link>
 
-          <div className="text-center p-3 bg-muted rounded-lg">
-            <div className="text-2xl font-bold text-primary">{stats.streakDays}</div>
-            <div className="text-xs text-muted-foreground">Day Streak</div>
-          </div>
+          <Link to="/dashboard" className="block group">
+            <div className="text-center p-3 bg-muted rounded-lg hover:bg-cat-orange/20 transition-colors cursor-pointer group-hover:scale-105 transform duration-200">
+              <div className="text-2xl font-bold text-primary">{stats.streakDays}</div>
+              <div className="text-xs text-muted-foreground">Day Streak</div>
+            </div>
+          </Link>
 
-          <div className="text-center p-3 bg-muted rounded-lg">
-            <div className="text-2xl font-bold text-primary">{stats.todaySessions}</div>
-            <div className="text-xs text-muted-foreground">Today</div>
-          </div>
+          <Link to="/dashboard" className="block group">
+            <div className="text-center p-3 bg-muted rounded-lg hover:bg-cat-orange/20 transition-colors cursor-pointer group-hover:scale-105 transform duration-200">
+              <div className="text-2xl font-bold text-primary">{stats.todaySessions}</div>
+              <div className="text-xs text-muted-foreground">Today</div>
+            </div>
+          </Link>
         </div>
 
         {/* Achievements Section */}
