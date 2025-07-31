@@ -3,6 +3,13 @@ import { PomodoroTimer } from '@/components/PomodoroTimer';
 import { VirtualCat } from '@/components/VirtualCat';
 import { StatsPanel } from '@/components/StatsPanel';
 import { EventTable, SessionEvent } from '@/components/EventTable';
+import { CatCardReward } from '@/components/CatCardReward';
+import { CatCollection } from '@/components/CatCollection';
+import { CatCardData } from '@/components/CatCard';
+import { getRandomCatCard } from '@/data/catCards';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Gift } from 'lucide-react';
 
 const Index = () => {
   const [treats, setTreats] = useState(5);
@@ -18,6 +25,12 @@ const Index = () => {
     experience: 0,
     experienceToNext: 100
   });
+
+  // Cat collection state
+  const [catCollection, setCatCollection] = useState<CatCardData[]>([]);
+  const [showCardReward, setShowCardReward] = useState(false);
+  const [rewardCard, setRewardCard] = useState<CatCardData | null>(null);
+  const [showCollection, setShowCollection] = useState(false);
 
   const handleSessionComplete = (type: 'focus' | 'break', taskName?: string) => {
     // Add event to history
@@ -35,6 +48,18 @@ const Index = () => {
       setTreats(prev => prev + 2);
       setToys(prev => prev + 1);
       
+      // Cat card reward (30% chance)
+      if (Math.random() < 0.3) {
+        const newCard = getRandomCatCard();
+        // Check if we already have this card
+        const hasCard = catCollection.some(card => card.id === newCard.id);
+        if (!hasCard) {
+          const cardWithObtained = { ...newCard, obtained: new Date() };
+          setRewardCard(cardWithObtained);
+          setShowCardReward(true);
+        }
+      }
+      
       // Update stats
       setStats(prev => {
         const newExperience = prev.experience + 25;
@@ -50,6 +75,12 @@ const Index = () => {
           experienceToNext: newLevel > prev.level ? prev.experienceToNext + 50 : prev.experienceToNext
         };
       });
+    }
+  };
+
+  const handleCollectCard = () => {
+    if (rewardCard) {
+      setCatCollection(prev => [rewardCard, ...prev]);
     }
   };
 
@@ -72,6 +103,33 @@ const Index = () => {
   const handleDeleteEvent = (id: string) => {
     setEvents(prev => prev.filter(event => event.id !== id));
   };
+
+  if (showCollection) {
+    return (
+      <div className="min-h-screen bg-gradient-cozy p-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h1 className="text-4xl font-bold text-cat-brown mb-2">
+                🎴 Cat Collection
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                Your legendary cat cards
+              </p>
+            </div>
+            <Button 
+              onClick={() => setShowCollection(false)}
+              variant="outline"
+              className="border-cat-orange text-cat-brown hover:bg-cat-cream"
+            >
+              Back to Timer
+            </Button>
+          </div>
+          <CatCollection collection={catCollection} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-cozy p-4">
@@ -113,8 +171,34 @@ const Index = () => {
               onSpendToys={handleSpendToys}
             />
             <StatsPanel stats={stats} />
+            
+            {/* Cat Collection Card */}
+            <Card className="bg-gradient-cozy border-cat-pink/30 shadow-soft">
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="text-4xl mb-2">🎴</div>
+                <h3 className="text-lg font-bold text-cat-brown">Cat Collection</h3>
+                <p className="text-sm text-muted-foreground">
+                  You have {catCollection.length} legendary cat cards
+                </p>
+                <Button 
+                  onClick={() => setShowCollection(true)}
+                  className="w-full bg-gradient-warm hover:shadow-glow"
+                >
+                  <Gift className="w-4 h-4 mr-2" />
+                  View Collection
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
+
+        {/* Cat Card Reward Modal */}
+        <CatCardReward
+          isOpen={showCardReward}
+          onClose={() => setShowCardReward(false)}
+          rewardCard={rewardCard}
+          onCollect={handleCollectCard}
+        />
       </div>
     </div>
   );
