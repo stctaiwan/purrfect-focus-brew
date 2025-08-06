@@ -104,6 +104,20 @@ const Index = () => {
     setEvents(prev => prev.filter(event => event.id !== id));
   };
 
+  const testCatCardGeneration = () => {
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        const newCard = getRandomCatCard();
+        const hasCard = catCollection.some(card => card.id === newCard.id);
+        if (!hasCard) {
+          const cardWithObtained = { ...newCard, obtained: new Date() };
+          setRewardCard(cardWithObtained);
+          setShowCardReward(true);
+        }
+      }, i * 1000); // 1 second delay between each card
+    }
+  };
+
   if (showCollection) {
     return (
       <div className="min-h-screen bg-gradient-cozy p-4">
@@ -182,10 +196,17 @@ const Index = () => {
                 </p>
                 <Button 
                   onClick={() => setShowCollection(true)}
-                  className="w-full bg-gradient-warm hover:shadow-glow"
+                  className="w-full bg-gradient-warm hover:shadow-glow mb-2"
                 >
                   <Gift className="w-4 h-4 mr-2" />
                   View Collection
+                </Button>
+                <Button 
+                  onClick={testCatCardGeneration}
+                  variant="outline"
+                  className="w-full border-cat-orange text-cat-brown hover:bg-cat-cream"
+                >
+                  Test 3 Cards
                 </Button>
               </CardContent>
             </Card>
