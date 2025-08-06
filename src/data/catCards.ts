@@ -1,5 +1,17 @@
 import { CatCardData } from '@/components/CatCard';
 
+// Import cat images
+import winstonCat from '@/assets/winston-cat.png';
+import einsteinCat from '@/assets/einstein-cat.png';
+import shakespeareCat from '@/assets/shakespeare-cat.png';
+import leonardoCat from '@/assets/leonardo-cat.png';
+import marieCat from '@/assets/marie-cat.png';
+import beethovenCat from '@/assets/beethoven-cat.png';
+import napoleonCat from '@/assets/napoleon-cat.png';
+import cleopatraCat from '@/assets/cleopatra-cat.png';
+import teslaCat from '@/assets/tesla-cat.png';
+import marilynCat from '@/assets/marilyn-cat.png';
+
 export const CAT_CARDS: CatCardData[] = [
   {
     id: 'churchill-cat',
@@ -14,7 +26,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 9,
       fluffiness: 6
     },
-    catEmoji: '🐱',
+    catImage: winstonCat,
     backgroundColor: 'from-amber-500 to-orange-600'
   },
   {
@@ -30,7 +42,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 7,
       fluffiness: 9
     },
-    catEmoji: '🐱',
+    catImage: einsteinCat,
     backgroundColor: 'from-blue-500 to-purple-600'
   },
   {
@@ -46,7 +58,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 10,
       fluffiness: 8
     },
-    catEmoji: '🐱',
+    catImage: shakespeareCat,
     backgroundColor: 'from-purple-500 to-indigo-600'
   },
   {
@@ -62,7 +74,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 9,
       fluffiness: 7
     },
-    catEmoji: '🐱',
+    catImage: leonardoCat,
     backgroundColor: 'from-green-500 to-teal-600'
   },
   {
@@ -78,7 +90,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 8,
       fluffiness: 6
     },
-    catEmoji: '🐱',
+    catImage: marieCat,
     backgroundColor: 'from-cyan-500 to-blue-600'
   },
   {
@@ -94,7 +106,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 10,
       fluffiness: 8
     },
-    catEmoji: '🐱',
+    catImage: beethovenCat,
     backgroundColor: 'from-violet-500 to-purple-600'
   },
   {
@@ -110,7 +122,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 9,
       fluffiness: 5
     },
-    catEmoji: '🐱',
+    catImage: napoleonCat,
     backgroundColor: 'from-red-500 to-orange-600'
   },
   {
@@ -126,7 +138,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 10,
       fluffiness: 7
     },
-    catEmoji: '🐱',
+    catImage: cleopatraCat,
     backgroundColor: 'from-yellow-500 to-amber-600'
   },
   {
@@ -142,7 +154,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 8,
       fluffiness: 6
     },
-    catEmoji: '🐱',
+    catImage: teslaCat,
     backgroundColor: 'from-blue-500 to-cyan-600'
   },
   {
@@ -158,7 +170,7 @@ export const CAT_CARDS: CatCardData[] = [
       charm: 10,
       fluffiness: 8
     },
-    catEmoji: '🐱',
+    catImage: marilynCat,
     backgroundColor: 'from-pink-500 to-rose-600'
   }
 ];

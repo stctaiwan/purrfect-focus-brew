@@ -16,7 +16,7 @@ export interface CatCardData {
     charm: number;
     fluffiness: number;
   };
-  catEmoji: string;
+  catImage: string;
   backgroundColor: string;
   obtained?: Date;
 }
@@ -84,8 +84,12 @@ export const CatCard = ({ card, isNew = false, showCollectButton = false, onColl
 
         {/* Cat Display */}
         <div className="space-y-2">
-          <div className="text-6xl animate-bounce-gentle">
-            {card.catEmoji}
+          <div className="w-24 h-24 mx-auto rounded-full overflow-hidden bg-white/10 p-2">
+            <img 
+              src={card.catImage} 
+              alt={card.name}
+              className="w-full h-full object-cover rounded-full"
+            />
           </div>
           <h3 className="text-xl font-bold text-white drop-shadow-lg">
             {card.name}
