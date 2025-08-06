@@ -29,6 +29,10 @@ interface CatCardProps {
 }
 
 export const CatCard = ({ card, isNew = false, showCollectButton = false, onCollect }: CatCardProps) => {
+  // Safety check to prevent errors if card data is incomplete
+  if (!card || !card.attributes) {
+    return null;
+  }
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
       case 'legendary': return 'from-yellow-400 to-yellow-600 border-yellow-500';
