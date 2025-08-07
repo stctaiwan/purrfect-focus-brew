@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Heart, Zap, Smile } from 'lucide-react';
+import catsPlayingScene from '@/assets/cats-playing-scene.png';
 
 interface VirtualCatProps {
   treats: number;
@@ -113,11 +114,16 @@ export const VirtualCat = ({ treats, toys, onSpendTreats, onSpendToys }: Virtual
       <CardContent className="p-6 text-center space-y-6">
         {/* Cat Display */}
         <div className="relative">
-          <div className={`text-8xl ${getCatAnimation()} cursor-pointer hover:scale-110 transition-transform`}>
-            🐱
-          </div>
-          <div className="absolute -top-2 -right-2 text-2xl">
-            {getCatEmoji()}
+          <div className={`${getCatAnimation()} cursor-pointer hover:scale-105 transition-all duration-300 relative overflow-hidden rounded-xl`}>
+            <img 
+              src={catsPlayingScene} 
+              alt="Cats playing with toys" 
+              className="w-full h-48 object-cover rounded-xl shadow-soft"
+            />
+            <div className="absolute top-2 right-2 text-3xl animate-bounce">
+              {getCatEmoji()}
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl" />
           </div>
         </div>
 
